@@ -1,5 +1,10 @@
 package core.clients;
 
+import core.settings.ApiEndpoints;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -7,6 +12,7 @@ import java.util.Properties;
 public class APIClient {
     private final String baseUrl;
     public APIClient() {
+
         this.baseUrl = determineBaseUrl();
     }
     private String determineBaseUrl() {
