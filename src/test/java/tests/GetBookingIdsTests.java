@@ -37,31 +37,36 @@ public class GetBookingIdsTests {
             assertThat(booking.getBookingid()).isGreaterThan(0);
         }
     }
+        @Test
+        public void testGetBookingClass ()throws Exception {
+            //Выполняем запрос к endpoint / booking через APIClient
+            Response response = apiClient.getBookingId(2);
+
+            //Проверяем, что статус-код ответа равен 200
+            assertThat(response.getStatusCode()).isEqualTo(200);
+
+            String responseBody = response.getBody().asString();
+            BookingData bookings = objectMapper.readValue(responseBody, BookingData.class);
+
+            //Проверки значений полей из входящего json
+            assertThat(bookings.getTotalprice()).isGreaterThan(0); // Предполагается, что метод getBookingId() возвращает ID бронирования
+            assertThat(bookings.getBookingdates()).isNotNull(); // Проверка, что дата заезда не null
+            assertThat(bookings.isDepositpaid()).isIn(true, false);// Проверяет, что значение может быть как true, так false
+        }
     @Test
-    public void testGetBookingClass()throws Exception{
-        // Сначала получаем список бронирований, чтобы взять ID для тестирования
-        Response bookingListResponse = apiClient.getBooking();
-        assertThat(bookingListResponse.getStatusCode()).isEqualTo(200);
+    public void testGetBookingClassSecond ()throws Exception {
+        //Выполняем запрос к endpoint / booking через APIClient
+        Response response = apiClient.getBookingIdSecond(2408);
 
-        String bookingListBody = bookingListResponse.getBody().asString();
-        List<Booking> bookings = objectMapper.readValue(bookingListBody, new TypeReference<List<Booking>>() {});
-        assertThat(bookings).isNotEmpty();
-
-        // Получаем ID первого бронирования для теста
-        int bookingId = bookings.get(0).getBookingid();
-
-        // Выполняем запрос к endpoint /booking/{id} через APIClient, используя ID бронирования
-        Response response = apiClient.getBookingId(bookingId);
-
-        // Проверяем, что статус-код ответа равен 200
+        //Проверяем, что статус-код ответа равен 200
         assertThat(response.getStatusCode()).isEqualTo(200);
 
         String responseBody = response.getBody().asString();
-        BookingData bookingData = objectMapper.readValue(responseBody, BookingData.class);
+        BookingData bookings = objectMapper.readValue(responseBody, BookingData.class);
 
-        // Проверки значений полей из входящего json
-        assertThat(bookingData.getTotalprice()).isGreaterThan(0); // Ожидается, что цена будет больше 0
-        assertThat(bookingData.getBookingdates()).isNotNull(); // Проверка, что дата заезда не null
-        assertThat(bookingData.isDepositpaid()).isIn(true, false); // Проверяет, что значение может быть как true, так false
+        //Проверки значений полей из входящего json
+        assertThat(bookings.getTotalprice()).isGreaterThan(0); // Предполагается, что метод getBookingId() возвращает ID бронирования
+        assertThat(bookings.getBookingdates()).isNotNull(); // Проверка, что дата заезда не null
+        assertThat(bookings.isDepositpaid()).isIn(true, false);// Проверяет, что значение может быть как true, так false
     }
 }

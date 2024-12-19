@@ -46,6 +46,8 @@ public class APIClient {
     }
     // GET-запрос на эндпоинт /booking
     public Response getBooking(){
+        String url = baseUrl + ApiEndpoints.BOOKING.getPath();
+        System.out.println("Отправка GET-запроса на URL: " + url);
         return getRequestSpec()
                 .when()
                 .get(ApiEndpoints.BOOKING.getPath())
@@ -56,9 +58,24 @@ public class APIClient {
     }
     // GET-запрос на эндпоинт /bookingId
     public Response getBookingId(int id) {
+        String url = baseUrl + ApiEndpoints.BOOKING.getPath() + "/" + id;
+        System.out.println("Отправка GET-запроса на URL: " + url);
         return getRequestSpec()
                 .when()
                 .get(ApiEndpoints.BOOKING.getPath() + "/" + id)  // Используем новый метод getBookingPath
+                .then()
+                .statusCode(200) // Можно изменить статусный код в зависимости от того, что ожидается
+                .extract()
+                .response();
+    }
+    // GET-запрос на эндпоинт /bookingId
+    public Response getBookingIdSecond(int bookingId) {
+        String url = baseUrl + ApiEndpoints.BOOKING.getPath() + "/" + bookingId;
+        System.out.println("Отправка GET-запроса на URL: " + url);
+        return getRequestSpec()
+                .pathParam("id", bookingId)
+                .when()
+                .get(ApiEndpoints.BOOKING.getPath() + "/{id}")  // Используем новый метод getBookingPath
                 .then()
                 .statusCode(200) // Можно изменить статусный код в зависимости от того, что ожидается
                 .extract()
