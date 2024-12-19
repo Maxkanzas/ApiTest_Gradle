@@ -6,8 +6,7 @@ package core.settings;
 
 public enum ApiEndpoints {
     PING("/ping"),
-    BOOKING("/booking"),
-    BOOKINGID ("/booking/1");
+    BOOKING("/booking");
 
     private final String path;
 
@@ -16,5 +15,8 @@ public enum ApiEndpoints {
     }
     public String getPath() {
         return path;
+    }
+    public String getBookingPath(int id) {
+        return BOOKING.getPath() + "/" + id;
     }
 }

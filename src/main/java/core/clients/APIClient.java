@@ -54,13 +54,13 @@ public class APIClient {
                 .extract()
                 .response();
     }
-    // GET-запрос на эндпоинт /booking
-    public Response getBookingId(){
+    // GET-запрос на эндпоинт /bookingId
+    public Response getBookingId(int id) {
         return getRequestSpec()
                 .when()
-                .get(ApiEndpoints.BOOKINGID.getPath())
+                .get(ApiEndpoints.BOOKING.getBookingPath(id))  // Используем новый метод getBookingPath
                 .then()
-                .statusCode(200)
+                .statusCode(200) // Можно изменить статусный код в зависимости от того, что ожидается
                 .extract()
                 .response();
     }
