@@ -58,7 +58,7 @@ public class APIClient {
     public Response getBookingId(int id) {
         return getRequestSpec()
                 .when()
-                .get(ApiEndpoints.BOOKING.getBookingPath(id))  // Используем новый метод getBookingPath
+                .get(ApiEndpoints.BOOKING.getPath() + "/" + id)  // Используем новый метод getBookingPath
                 .then()
                 .statusCode(200) // Можно изменить статусный код в зависимости от того, что ожидается
                 .extract()

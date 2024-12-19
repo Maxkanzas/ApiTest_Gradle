@@ -16,7 +16,4 @@ public enum ApiEndpoints {
     public String getPath() {
         return path;
     }
-    public String getBookingPath(int id) {
-        return BOOKING.getPath() + "/" + id;
-    }
 }
