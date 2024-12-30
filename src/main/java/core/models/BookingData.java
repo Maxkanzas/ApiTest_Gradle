@@ -1,7 +1,4 @@
 package core.models;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class BookingData {
     private String firstname;
     private String lastname;
@@ -9,23 +6,6 @@ public class BookingData {
     private boolean depositpaid;
     private BookingDates bookingdates;
     private String additionalneeds;
-
-    @JsonCreator
-    public BookingData(
-            @JsonProperty("firstname") String firstname,
-            @JsonProperty("lastname") String lastname,
-            @JsonProperty("totalprice") int totalprice,
-            @JsonProperty("depositpaid") boolean depositpaid,
-            @JsonProperty("bookingdates") BookingDates bookingdates,
-            @JsonProperty("additionalneeds") String additionalneeds
-    ) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.totalprice = totalprice;
-        this.depositpaid = depositpaid;
-        this.bookingdates = bookingdates;
-        this.additionalneeds = additionalneeds;
-    }
 
     // Getters and Setters
     public String getFirstname() {
