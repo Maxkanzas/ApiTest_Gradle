@@ -6,6 +6,8 @@ public class BookingDates {
     private String checkin;
     private String checkout;
 
+    public BookingDates() {}
+
     @JsonCreator
     public BookingDates(
             @JsonProperty("checkin") String checkin,
