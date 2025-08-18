@@ -232,7 +232,7 @@ public class APIClient {
             queryParams.put("checkout", checkout);
         }
         if (limit != null) {
-            queryParams.put("limit", limit.toString()); // Добавляем параметр limit, если он указан
+            queryParams.put("limit", limit.toString());
         }
 
         return given()
